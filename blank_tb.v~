@@ -1,0 +1,20 @@
+`include "blank.v"
+module blank_tb();
+
+reg [4:0]r;
+reg cout;
+reg [31:0]x1,x2;
+wire [31:0]x11;
+
+main m0(x1,x2,r,cout,x11);
+initial 
+begin 
+
+assign x1=32'b0010;
+assign x2=32'b0011;
+assign r=5'b1;
+assign cout=1'b1;
+end
+$monitor("x1=%b , x2=%b, r=%b,cout=%b, x11=%b",x1,x2,r,cout,x11);
+endmodule
+

@@ -1,0 +1,83 @@
+#! /usr/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x8f0280 .scope module, "blank_tb" "blank_tb" 2 2;
+ .timescale 0 0;
+v0x901660_0 .var "cout", 0 0;
+v0x901730_0 .var "r", 4 0;
+v0x901800_0 .var "x1", 31 0;
+v0x9018d0_0 .net "x11", 31 0, v0x901150_0; 1 drivers
+v0x9019a0_0 .var "x2", 31 0;
+S_0x8f0370 .scope module, "m0" "main" 2 9, 3 1, S_0x8f0280;
+ .timescale 0 0;
+v0x9012a0_0 .net "cout", 0 0, v0x901660_0; 1 drivers
+v0x901370_0 .net "r", 4 0, v0x901730_0; 1 drivers
+v0x901420_0 .net "x1", 31 0, v0x901800_0; 1 drivers
+v0x9014d0_0 .alias "x11", 31 0, v0x9018d0_0;
+v0x9015b0_0 .net "x2", 31 0, v0x9019a0_0; 1 drivers
+S_0x8ecf40 .scope module, "n00" "new" 3 7, 3 11, S_0x8f0370;
+ .timescale 0 0;
+v0x8ed030_0 .alias "cout", 0 0, v0x9012a0_0;
+v0x901010_0 .alias "r", 4 0, v0x901370_0;
+v0x9010b0_0 .alias "x1", 31 0, v0x901420_0;
+v0x901150_0 .var "x11", 31 0;
+v0x901200_0 .alias "x2", 31 0, v0x9015b0_0;
+E_0x8ed450 .event edge, v0x8ed030_0, v0x901200_0, v0x901010_0, v0x9010b0_0;
+    .scope S_0x8ecf40;
+T_0 ;
+    %wait E_0x8ed450;
+    %load/v 8, v0x8ed030_0, 1;
+    %jmp/0xz  T_0.0, 8;
+    %load/v 8, v0x901200_0, 32;
+    %ix/load 0, 32, 0;
+    %assign/v0 v0x901150_0, 0, 8;
+T_0.0 ;
+    %load/v 8, v0x8ed030_0, 1;
+    %cmpi/u 8, 0, 1;
+    %mov 8, 4, 1;
+    %load/v 9, v0x901010_0, 5;
+    %mov 14, 0, 2;
+    %cmpi/u 9, 0, 7;
+    %inv 4, 1;
+    %mov 9, 4, 1;
+    %and 8, 9, 1;
+    %jmp/0xz  T_0.2, 8;
+    %load/v 8, v0x9010b0_0, 32;
+    %ix/load 0, 32, 0;
+    %assign/v0 v0x901150_0, 0, 8;
+T_0.2 ;
+    %load/v 8, v0x8ed030_0, 1;
+    %cmpi/u 8, 0, 1;
+    %mov 8, 4, 1;
+    %load/v 9, v0x901010_0, 5;
+    %mov 14, 0, 2;
+    %cmpi/u 9, 0, 7;
+    %mov 9, 4, 1;
+    %and 8, 9, 1;
+    %jmp/0xz  T_0.4, 8;
+    %ix/load 0, 32, 0;
+    %assign/v0 v0x901150_0, 0, 0;
+T_0.4 ;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0x8f0280;
+T_1 ;
+    %movi 8, 2, 32;
+    %cassign/v v0x901800_0, 8, 32;
+    %movi 40, 3, 32;
+    %cassign/v v0x9019a0_0, 40, 32;
+    %movi 72, 1, 5;
+    %cassign/v v0x901730_0, 72, 5;
+    %cassign/v v0x901660_0, 1, 1;
+    %vpi_call 2 18 "$monitor", "x1=%b , x2=%b, r=%b,cout=%b, x11=%b", v0x901800_0, v0x9019a0_0, v0x901730_0, v0x901660_0, v0x9018d0_0;
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "blank_tb.v";
+    "./blank.v";

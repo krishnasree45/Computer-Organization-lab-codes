@@ -1,0 +1,14 @@
+module d_ff ( a,b,c, clk, q,q1,q2);
+   input d ,clk;
+   output q, q_bar;
+   wire d ,clk;
+   reg q, q_bar;
+     	 
+   always @ (posedge clk)
+   begin
+    q <= a;
+    q1<=b;
+    q2 <= c;
+ end
+
+endmodule

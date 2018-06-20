@@ -1,0 +1,46 @@
+`include"fresh_pipe.v"
+module maintb();
+
+
+reg sa,sb,opcode;
+reg [22:0]ma,mb;
+reg [7:0]ea,eb;
+wire [7:0]exponent,exp;
+wire sign,totalcarry;
+wire [23:0]mant;
+reg clk;
+wire [23:0]out1,out2,sum;
+wire [7:0]x_temp1;
+
+//sa,sb,opcode,ma,mb,ea,eb,out_mant,sign,exponent,totalcarry,res,clk;
+//sa,sb,opcode,ma,mb,ea,eb,out_mant,sign,exponent,totalcarry,clk)
+main  m00(sa,sb,opcode,ma,mb,ea,eb,mant,sign,exponent,totalcarry,out1,out2,x_temp1,sum,clk);
+
+
+initial
+clk=1'b0;
+initial
+begin
+sa=1'b0;
+sb=1'b0;
+opcode=1'b1;
+ma=23'b01000000000000000000000;
+mb=23'b00000000000000000000000;
+ea=8'b00000010;
+eb=8'b00000001;
+
+
+#100 $finish;
+end 
+
+always
+#2 clk=~clk;
+
+initial
+$monitor($time,"clock=%b ,sa=%b , sb=%b, opcode=%b,ma=%b, mb=%b,ea=%d,eb=%d,mant=%b,out1=%b,out2=%b,sign=%b,exponent=%b,carryout=%b,x_temp=%b,sum=%b",clk,sa,sb,opcode,ma,mb,ea,eb,mant,out1,out2,sign,exponent,totalcarry,x_temp1,sum);
+
+endmodule
+
+
+
+

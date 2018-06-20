@@ -1,0 +1,17 @@
+`include "cla8.v"
+module cla8tb();
+reg [7:0]a,b;
+reg cin;
+wire [7:0]s;
+wire cout;
+reg [7:0]temp;
+cla8 f0(cout,s,a,~b,1);
+initial
+begin
+a=8'b00000111;
+b=8'b00000010;
+cin=1'b1;
+temp=~b;
+$monitor("sum=   %b\ncout=\t\t%b,~b=%b",s,cout,temp);
+end
+endmodule

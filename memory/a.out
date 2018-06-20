@@ -1,0 +1,54 @@
+#! /usr/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x127ddb0 .scope module, "comparator_tb" "comparator_tb" 2 2;
+ .timescale 0 0;
+v0x12b1450_0 .var "a", 7 0;
+v0x12b14f0_0 .var "b", 7 0;
+v0x12b15a0_0 .net "eql", 0 0, L_0x12b1ba0; 1 drivers
+v0x12b1650_0 .net "noteql", 0 0, L_0x12b2050; 1 drivers
+S_0x127b5e0 .scope module, "c3" "comparator" 2 6, 3 2, S_0x127ddb0;
+ .timescale 0 0;
+L_0x12b0fc0 .functor NOT 8, v0x12b14f0_0, C4<00000000>, C4<00000000>, C4<00000000>;
+L_0x12b1760 .functor AND 8, v0x12b1450_0, v0x12b14f0_0, C4<11111111>, C4<11111111>;
+L_0x12b1810 .functor NOT 8, v0x12b1450_0, C4<00000000>, C4<00000000>, C4<00000000>;
+L_0x12b1870 .functor NOT 8, v0x12b14f0_0, C4<00000000>, C4<00000000>, C4<00000000>;
+L_0x12b19c0 .functor AND 8, L_0x12b1810, L_0x12b1870, C4<11111111>, C4<11111111>;
+L_0x12b1aa0 .functor OR 8, L_0x12b1760, L_0x12b19c0, C4<00000000>, C4<00000000>;
+L_0x12b1e50 .functor AND 2, L_0x12b1ce0, C4<01>, C4<11>, C4<11>;
+L_0x12b1f50 .functor NOT 2, L_0x12b1e50, C4<00>, C4<00>, C4<00>;
+v0x127b490_0 .net *"_s14", 1 0, L_0x12b1ce0; 1 drivers
+v0x12b09a0_0 .net *"_s17", 0 0, C4<0>; 1 drivers
+v0x12b0a40_0 .net *"_s18", 1 0, C4<01>; 1 drivers
+v0x12b0ae0_0 .net *"_s2", 7 0, L_0x12b1760; 1 drivers
+v0x12b0b90_0 .net *"_s20", 1 0, L_0x12b1e50; 1 drivers
+v0x12b0c30_0 .net *"_s22", 1 0, L_0x12b1f50; 1 drivers
+v0x12b0d10_0 .net *"_s4", 7 0, L_0x12b1810; 1 drivers
+v0x12b0db0_0 .net *"_s6", 7 0, L_0x12b1870; 1 drivers
+v0x12b0ea0_0 .net *"_s8", 7 0, L_0x12b19c0; 1 drivers
+v0x12b0f40_0 .net "a", 7 0, v0x12b1450_0; 1 drivers
+v0x12b1040_0 .net "b", 7 0, v0x12b14f0_0; 1 drivers
+v0x12b10e0_0 .net "bnot", 7 0, L_0x12b0fc0; 1 drivers
+v0x12b11f0_0 .alias "eql", 0 0, v0x12b15a0_0;
+v0x12b1290_0 .net "exnor", 7 0, L_0x12b1aa0; 1 drivers
+v0x12b13b0_0 .alias "noteql", 0 0, v0x12b1650_0;
+L_0x12b1ba0 .reduce/and L_0x12b1aa0;
+L_0x12b1ce0 .concat [ 1 1 0 0], L_0x12b1ba0, C4<0>;
+L_0x12b2050 .part L_0x12b1f50, 0, 1;
+    .scope S_0x127ddb0;
+T_0 ;
+    %set/v v0x12b1450_0, 0, 8;
+    %movi 8, 2, 8;
+    %set/v v0x12b14f0_0, 8, 8;
+    %vpi_call 2 11 "$monitor", "a equal b=%b,a not equal to b=%b", v0x12b15a0_0, v0x12b1650_0;
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "comparator_tb.v";
+    "./comparator.v";
